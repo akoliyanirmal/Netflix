@@ -1,11 +1,32 @@
 import React, { useState } from "react";
 import "./Login.css";
 import logo from "../../assets/logo.png";
+import { login, singup } from "../../firebase";
+import netflix_spinner from "../../assets/netflix_spinner.gif";
 
 const Login = () => {
   const [singState, setSingState] = useState("Sing In");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  return (
+  const user_auth = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    if (singState === "Sing In") {
+      await login(email, password);
+    } else {
+      await singup(name, email, password);
+    }
+    setLoading(false);
+  };
+
+  return loading ? (
+    <div className="login-spinner">
+      <img src={netflix_spinner} alt="" />
+    </div>
+  ) : (
     <>
       <div className="login">
         <img className="login-logo" src={logo} alt="" />
@@ -13,15 +34,39 @@ const Login = () => {
           <h1>{singState}</h1>
           <form>
             {singState === "Sing Up" ? (
-              <input type="text" placeholder="Your name" />
+              <input
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                type="text"
+                placeholder="Your name"
+              />
             ) : (
               <></>
             )}
 
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              type="email"
+              placeholder="Email"
+            />
 
-            <button>{singState}</button>
+            <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              type="password"
+              placeholder="Password"
+            />
+
+            <button onClick={user_auth} type="submit">
+              {singState}
+            </button>
             <div className="form-help">
               <div className="remember">
                 <input type="checkbox" placeholder="Checkbox" />
