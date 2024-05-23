@@ -5,7 +5,7 @@
 .banner-img {
   width: 100%;
   mask-image: linear-gradient(to right, transparent, black 75%);
-  -weblit-mask-image: linear-gradient(to right, transparent, black 75%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 75%);
 }
 
 .hero_caption {
@@ -31,6 +31,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 50px;
+  flex-wrap: wrap;
 }
 
 .hero-btns .btn img {
@@ -86,7 +87,7 @@
     width: 40%;
   }
   .hero_caption p {
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 10px;
   }
   .hero-btns .btn img {
@@ -101,12 +102,22 @@
   .caption-img {
     display: none;
   }
+  .hero_caption {
+    padding-left: 2%;
+  }
+  .hero_caption p {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
   .hero-btns .btn img {
     width: 15px;
   }
-  .btn {
+  .hero-btns .btn {
     padding: 4px 10px;
     gap: 5px;
     font-size: 10px;
+  }
+  .more-cards {
+    padding-left: 2%;
   }
 }
